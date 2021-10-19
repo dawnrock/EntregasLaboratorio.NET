@@ -8,3 +8,22 @@ Los videos y el contenido de cada artículo se almacenan en un storage S3 y en u
 Los videos se pueden clasificar por temáticas (Devops / Front End / Back End / ...)
 Los videos tienen autores (ponemos la restricción, un video tiene un autor), un curso puede tener varios autores.
 
+MARKDOWN
+En la escena "Home", accedemos a la lista de más vistos y últimos 5 publicados de la tabla Video a través del JOIN entre Home-Cursos, Cursos-Leccion y 
+Leccion-Video, ya que la tabla video contiene los valores Created y Views de cada video. Además de estas caracteristicas, obtenemos las categorias principales
+(CategoriaId) a traves del JOIN entre la tabla Video-Categoria.
+
+En la  escena "Cursos" necesitaremos su/s Autor/es, que obtendremos con una tabla intermedia entre Curso y Autor llamada AutorCurso. De esta manera evitamos 
+la relación muchos a muchos. Accedemos a la leccion y su articulo a través del JOIN Cursos-Leccion y Leccion-Articulo. Por último 
+accedemos a las descripciones mediante el JOIN Cursos-Leccion y Leccion-Descripcion.
+
+La siguiente escena llamada "Lección", obtenemos el articulo relacionado a la Leccion Mediante el JOIN entre Leccion-Articulo y el
+video con la conexión Leccion-Video. En este caso no necesitamos crear tablas intermedias ya que la relación entre Leccion con 
+Video y Articulo es de uno a muchos.
+
+La útlima escena "Autor" partimos de la Tabla con el mismo nombre. Obtenemos la informacion de los cursos en los que ha
+participado gracias al JOIN de relación uno a muchos Autor-Video(AutorVideoId),ya que un video solo puede tener un autor y
+Video-Leccion, de donde sacaremos la informacion de los cursos en los que ha participado mediante otro JOIN Leccion-Descripcion.
+
+
+
